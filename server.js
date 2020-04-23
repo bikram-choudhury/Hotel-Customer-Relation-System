@@ -31,7 +31,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 if (process.env && process.env.NODE_ENV && process.env.NODE_ENV === 'production') {
-    app.use('/', express.static(path.join(__dirname, '/dist/resturant-application')));
+    app.use('/', express.static(path.join(__dirname, '/dist/hotel-customer-relation-system')));
 }
 
 app.use('/resources', express.static(path.join(__dirname, 'server/public')));
