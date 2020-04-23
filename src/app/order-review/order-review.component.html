@@ -1,0 +1,26 @@
+<div class="mt-4 mb-4">
+    <div class="row" *ngIf="orderDetails && orderDetails.length">
+        <div class="col-xs-12 col-sm-6 col-lg-4 mt-1" *ngFor="let details of orderDetails; let index = index;">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                    <div>{{getOrderCreatedDate(details.createdAt) | date: 'medium'}}</div>
+                    <div><strong>{{details.status}}</strong></div>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title text-left">#{{index + 1}}</h5>
+                    <div class="card-text">
+                        <div class="d-flex justify-content-between" *ngFor="let item of details.itemsInCart">
+                            <label>{{item.qty}}x</label>
+                            <label>{{item.name}}</label>
+                            <label>{{item.price | currency: 'INR'}}</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <label>Total: </label>
+                    <label>{{getTotal(details) | currency: 'INR'}}</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+<div class="container-fluid" *ngIf="selectedCategory">
+    <h1 class="container-h1">Menu</h1>
+    <div class="row">
+
+        <!-- Nav pills -->
+        <ul class="nav nav-pills" role="tablist">
+            <li class="nav-item" *ngFor="let category of categories; let i=index;">
+                <a class="nav-link" [class.active]="category.id===selectedCategory.id" data-toggle="pill"
+                    (click)="setCategory(category)">{{category.name}}</a>
+            </li>
+        </ul>
+
+
+        <!-- Tab panes -->
+        <div class="tab-content slideanim">
+            <div class="tab-pane fade" [ngClass]="{
+                'active': category.id===selectedCategory.id,
+                'show': category.id===selectedCategory.id
+            }" *ngFor="let category of categories">
+                <div class="row">
+                    <div class="col-sm-7">
+                        <ul class="list-group" *ngIf="itemsForSelectedCategory && itemsForSelectedCategory.length">
+                            <li class="list-group-item" *ngFor="let item of itemsForSelectedCategory">
+                                <h4 class="list-group-item-heading">
+                                    {{item.name}}
+                                    <span class="badge pull-right">
+                                        {{item.price | currency: 'INR'}}
+                                    </span>
+                                </h4>
+                                <p class="list-group-item-text">
+                                    {{item.description}}
+                                </p>
+                                <div class="list-group-action-item">
+                                    <button class="badge pull-right rounded-top border-0 add-btn"
+                                        (click)="addToCart(item, 1)">Add</button>
+                                </div>
+                            </li>
+                        </ul>
+                        <ul class="list-group" *ngIf="!(itemsForSelectedCategory && itemsForSelectedCategory.length)">
+                            <li class="list-group-item">
+                                <h4 class="list-group-item-heading">No Items</h4>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-5">
+                        <div class="right-cover">
+                            <h3>{{category.name}}</h3>
+                            <img [src]="category.image" class="menu-img img-fluid"
+                                alt="{{category.name | lowercase}}-img" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

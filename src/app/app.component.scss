@@ -1,0 +1,9 @@
+.jumbotron {
+    &.user-loggedin {
+        height: 300px;
+        .header-content-inner {
+            margin: 0 auto;
+            margin-top: 50px;
+        }
+    }
+}

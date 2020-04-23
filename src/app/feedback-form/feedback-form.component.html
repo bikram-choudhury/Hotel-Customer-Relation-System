@@ -1,0 +1,57 @@
+<div class="container-fluid">
+    <h1 class="container-h1">Feedback form</h1>
+    <div class="row slideanim">
+        <div class="col-md-6 col-sm-6 contact-left">
+            <div class="left-box">
+                <h4>Contact us</h4>
+                <address class="contact">
+                    <span class="span-contact">Call:</span>
+                    <br>
+                    +091 1234 5678
+                    <br>
+                    <span class="span-contact">Email:</span>
+                    <br>
+                    northstreet@gmail.com
+                    <br>
+                    <span class="span-contact">Visit:</span>
+                    <br>
+                    22, Northstreet Road
+                    <br>
+                    Melbourne, Victoria
+                    <br>
+                    Australia
+                </address>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-sm-6 contact-right">
+
+            <form novalidate action="mailto:anttnew@gmmmail.com" name="frm" method="post">
+                <div class="form-group has-feedback">
+                    <label class="sr-only">First name:</label>
+                    <input type="text" name="name" class="form-control" placeholder="First name" required>
+
+                </div>
+                <div class="form-group has-feedback">
+                    <label class="sr-only">Last name:</label>
+                    <input type="text" name="surname" class="form-control" placeholder="Last name" required>
+
+                </div>
+                <div class="form-group has-feedback">
+                    <label class="sr-only">Email:</label>
+                    <input type="email" name="email" class="form-control" placeholder="Email" required>
+
+                </div>
+                <div class="form-group">
+                    <label class="sr-only" name="comment" for="comment">Comment:</label>
+                    <textarea class="form-control" rows="5" id="comment" placeholder="Feedback"></textarea>
+                </div>
+                <div class="contact-buttons pull-left">
+                    <input type="submit" name="submit" value="Send" />
+                    <input type="reset" value="Reset" />
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+<div id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+    <app-header></app-header>
+
+    <div class="jumbotron" [class.user-loggedin]="isLoggedInRoute">
+        <div class="container-fluid">
+            <div class="header-content-inner">
+                <h1>Welcome to Northstreet restaurant</h1>
+                <h3>We are proud of our long history of making delicious meals, warm and
+                    friendly atmosphere and professional staff.</h3>
+            </div>
+        </div>
+    </div>
+
+    <router-outlet></router-outlet>
+
+    <app-footer></app-footer>
+</div>

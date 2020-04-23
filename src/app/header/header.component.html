@@ -1,0 +1,120 @@
+<nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
+    <a class="navbar-brand" href="#">Restaurant Northstreet</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" [routerLink]="['/']" fragment="about">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [routerLink]="['/']" fragment="menu">Menu</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [routerLink]="['/']" fragment="service">Service</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [routerLink]="['/']" fragment="contact">Contact</a>
+            </li>
+            <li class="nav-item" *ngIf="cartItems && cartItems.length">
+                <a class="nav-link" [routerLink]="['/checkout']">
+                    Checkout
+                    <span class="badge pull-right rounded ml-1 cart-item-count">{{cartItems.length}}</span>
+                </a>
+            </li>
+            <li class="nav-item" *ngIf="!isUserSignedUp">
+                <a class="nav-link" href="javascript:void(0)" (click)="showLoginModal()">Signin/Signup</a>
+            </li>
+            <li class="nav-item" *ngIf="isUserSignedUp">
+                <a class="nav-link" [routerLink]="['/my-orders']">My orders</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<section class="modal fade bs-modal-sm" id="signinSignupModal" tabindex="-1" role="dialog"
+    aria-labelledby="signinSignupModal" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+
+        <div class="modal-content">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link" [class.active]="panelState==='signin'" id="home-tab" data-toggle="tab"
+                        href="javascript:void(0);" (click)="updatePanelVisibility('signin')" role="tab"
+                        aria-controls="home" aria-selected="true">SignIn</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [class.active]="panelState==='signup'" id="profile-tab" data-toggle="tab"
+                        href="javascript:void(0);" (click)="updatePanelVisibility('signup')" role="tab"
+                        aria-controls="profile" aria-selected="false">SignUp</a>
+                </li>
+            </ul>
+            <div class="modal-body">
+                <div class="tab-content" id="myTabContent">
+                    <div [ngClass]="{'show active': panelState==='signin'}" class="tab-pane fade" id="signin"
+                        role="tabpanel" aria-labelledby="signin-tab">
+                        <form [formGroup]="signinForm" (ngSubmit)="submitSigninForm()">
+                            <div class="form-group">
+                                <label for="usernameForSignin">Username/Email</label>
+                                <input type="email" class="form-control"
+                                    [class.invalid]="usernameForSignin.touched && usernameForSignin.invalid"
+                                    id="usernameForSignin" placeholder="name@example.com" formControlName="username" />
+                            </div>
+                            <div class="form-group">
+                                <label for="passwordForSignin">Password</label>
+                                <input type="password" class="form-control"
+                                    [class.invalid]="passwordForSignin.touched && passwordForSignin.invalid"
+                                    id="passwordForSignin" placeholder="*********" formControlName="password" />
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" [disabled]="signinForm.invalid"
+                                    class="btn bootstrap-btn btn-success"
+                                    [class.disabled]="signinForm.invalid">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div [ngClass]="{'show active': panelState==='signup'}" class="tab-pane fade" id="signup"
+                        role="tabpanel" aria-labelledby="signup-tab">
+                        <form [formGroup]="signupForm" (ngSubmit)="submitSignupForm()">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="name" [class.invalid]="customerName.touched && customerName.invalid"
+                                    class="form-control" id="name" placeholder="Name" formControlName="name" />
+                            </div>
+                            <div class="form-group">
+                                <label for="phoneno">Contact No.</label>
+                                <input type="tel" maxlength="10" class="form-control" id="phoneno"
+                                    [class.invalid]="contactNo.touched && contactNo.invalid"
+                                    placeholder="Enter your contact no" formControlName="contactNo" />
+                            </div>
+                            <div class="form-group">
+                                <label for="usernameForSignup">Username/Email</label>
+                                <input type="email" class="form-control" id="usernameForSignup"
+                                    [class.invalid]="usernameForSignup.touched && usernameForSignup.invalid"
+                                    placeholder="name@example.com" formControlName="username" />
+                            </div>
+                            <div class="form-group">
+                                <label for="passwordForSignup">Password</label>
+                                <input type="password" class="form-control" id="passwordForSignup"
+                                    [class.invalid]="passwordForSignup.touched && passwordForSignup.invalid"
+                                    placeholder="*********" formControlName="password" />
+                            </div>
+                            <div class="form-group">
+                                <label for="confirm-password">Confirm password</label>
+                                <input type="password" class="form-control" id="confirm-password"
+                                    [class.invalid]="confirmPassword.touched && confirmPassword.invalid"
+                                    placeholder="*********" formControlName="confirmPassword" />
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" [disabled]="signupForm.invalid"
+                                    class="btn bootstrap-btn btn-success"
+                                    [class.disabled]="signupForm.invalid">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

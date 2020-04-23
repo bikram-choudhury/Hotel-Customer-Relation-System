@@ -1,0 +1,101 @@
+<div class="m-4">
+    <div class="row justify-content-center">
+        <div class="card text-center" style="width: 18rem;" *ngIf="!(cartItems && cartItems.length)">
+            <div class="card-body">
+                <h5 class="card-title">{{'Your cart is empty' | uppercase}}</h5>
+
+                <a [routerLink]="['/']" fragment="menu" class="btn btn-primary bootstrap-btn">
+                    {{'Add more food' | uppercase}}
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-8 col-md-12" *ngIf="cartItems && cartItems.length">
+            <div class="card">
+                <div class="card-header">
+                    <label>Items for review</label>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-borderless">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Item</th>
+                                    <th scope="col" class="text-center">Quantity</th>
+                                    <th scope="col" class="text-right">Price</th>
+                                    <th> </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of cartItems">
+                                    <td>{{getItemName(item.itemId)}}</td>
+                                    <td>
+                                        <div class="qty-action justify-content-center">
+                                            <button class="btn bootstrap-btn btn-sm text-danger"
+                                                (click)="decrementItemQty(item.itemId)">
+                                                <i class="fa fa-minus"></i>
+                                            </button>
+                                            <input class="form-control" type="text" name="qty" [(ngModel)]="item.qty" />
+                                            <button class="btn bootstrap-btn btn-sm text-success"
+                                                (click)="incrementItemQty(item.itemId)">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                    <td class="text-right">{{item.price | currency: 'INR'}}</td>
+                                    <td class="text-right">
+                                        <button class="btn btn-sm btn-danger bootstrap-btn"
+                                            (click)="removeItem(item.itemId)">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td><strong>Total</strong></td>
+                                    <td class="text-right">
+                                        <strong>{{getTotal() | currency: 'INR'}}</strong>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-sm-12  col-md-6">
+                            <a [routerLink]="['/']" fragment="menu"
+                                class="btn btn-block btn-outline-dark bootstrap-btn text-uppercase">
+                                Add more food
+                            </a>
+                        </div>
+                        <div class="col-sm-12 col-md-6 text-right">
+                            <button class="btn btn-block btn-success text-uppercase bootstrap-btn" (click)="checkout()">
+                                Checkout
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section id="orderSuccessModal" class="modal fade">
+    <div class="modal-dialog modal-confirm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="icon-box">
+                    <i class="material-icons">&#xE876;</i>
+                </div>
+                <div class="modal-title">Awesome!</div>
+            </div>
+            <div class="modal-body">
+                <p class="text-center">Your booking has been confirmed. Check your email for detials.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success btn-block" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</section>
